@@ -49,6 +49,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestAssemblyTests.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GildedRose.Console\GildedRose.Console.csproj">
+      <Project>{F928CC23-1B56-46FD-B1F2-FEE28F2B424C}</Project>
+      <Name>GildedRose.Console</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

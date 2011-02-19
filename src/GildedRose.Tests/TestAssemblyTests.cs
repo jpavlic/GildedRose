@@ -97,7 +97,7 @@ namespace GildedRose.Tests
                 {
                     if (Items[j].SellIn < 0)
                     {
-                        if ((Items[j].Name != "Aged Brie") && (Items[j].Name != "Backstage passes to a TAFKAL80ETC concert"))
+                        if ((Items[j].Name != "Aged Brie") && (Items[j].Name != "Backstage passes to a TAFKAL80ETC concert") && (Items[j].Name != "Sulfuras, Hand of Ragnaros"))
                         {
                             int toCompare = quality[j] - 2;
                             if (toCompare < 0)
@@ -120,8 +120,6 @@ namespace GildedRose.Tests
 
             updateInventory(100);
 
-            sulfras = findItemByName("Sulfuras, Hand of Ragnaros");
-
             Assert.AreEqual(sulfras.Quality, quality);
         }
 
@@ -135,8 +133,6 @@ namespace GildedRose.Tests
 
             updateInventory(10);
 
-            backstagePass = findItemByName("Backstage passes to a TAFKAL80ETC concert");
-
             Assert.AreEqual(35, backstagePass.Quality);
         }
 
@@ -149,8 +145,6 @@ namespace GildedRose.Tests
 
             updateInventory(14);
 
-            backstagePass = findItemByName("Backstage passes to a TAFKAL80ETC concert");
-
             Assert.AreEqual(47, backstagePass.Quality);
         }
 
@@ -162,8 +156,6 @@ namespace GildedRose.Tests
             int quality = backstagePass.Quality;
 
             updateInventory(16);
-
-            backstagePass = findItemByName("Backstage passes to a TAFKAL80ETC concert");
 
             Assert.AreEqual(0, backstagePass.Quality);
         }
@@ -178,11 +170,25 @@ namespace GildedRose.Tests
                 int quality = brie.Quality;
                 inventory.updateQuality();
 
-                brie = findItemByName("Aged Brie");
-
                 Assert.Greater(brie.Quality, quality);
             }
 
+        }
+
+        [Test]
+        public void ConjuredItemsDegradeInQualityTwiceAsFast()
+        {
+            Item conjured = findItemByName("Conjured Mana Cake");
+
+            int quality = conjured.Quality;
+            inventory.updateQuality();
+
+            Assert.AreEqual(quality - 2, conjured.Quality);
+
+            quality = conjured.Quality;
+            inventory.updateQuality();
+
+            Assert.AreEqual(quality - 2, conjured.Quality);
         }
     }
 }
